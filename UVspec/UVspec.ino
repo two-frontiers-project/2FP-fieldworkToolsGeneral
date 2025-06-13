@@ -1,10 +1,15 @@
 
 /*
   2FP UV spectral measurment tool
+
+  2025-06-13 James R. Henriksen
+  
   UVA (320-400nm), UVB (280-320nm), and UVC (200-280nm) 
   High Dynamic Range: Up to 3.43E+10 (resolution multiplied by gain range)
   accuracy of up to 24-bit signal resolution
   irradiance responsivity per count down to 2.38 nW/cm² at 64 ms integration time.
+
+  modified from the following examples
 */
 
 /*
@@ -120,6 +125,15 @@ void setup()
 
 }
 
+String filler(int repeatCount){
+  char repeatedChar = '-';
+  String newString = ""; // Initialize an empty String object
+  for (int i = 0; i < repeatCount; i++) {
+    newString += repeatedChar; // Concatenate the character
+  }
+  return newString;
+}
+  
 void loop()
 {
   //for boot screen
@@ -185,45 +199,38 @@ void loop()
     Serial.print(UVB);
     Serial.print(" UVC:");
     Serial.println(UVC);    
-    Serial.print(" TMP:");
-    Serial.println(myUVSensor.getTemp());    
 
 
 
     //indicate a reading is taking place
     myOLED.erase();
-    spacerstr = "     -.-- uW/cm^2";
     lineW = myOLED.getStringHeight(spacerstr);
     x0 = 0; 
     y0 = 0; 
-    //myOLED.rectangleFill(x0, y0+lineH*1, lineW, lineH, 1);
-    //myOLED.rectangleFill(x0, y0+lineH*2, lineW, lineH, 1);
-    //myOLED.rectangleFill(x0, y0+lineH*3, lineW, lineH, 1);
     
     measurementstr = "UVA (320-400nm): ";
     myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
     y0 += lineH;
-    //measurementstr = "     " + UVA + " uW/cm^2";
-    myOLED.text(x0, y0, spacerstr, 1); // Draw the text - color of white
+    measurementstr = "     " + filler(UVA.length()) + " uW/cm^2";
+    myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
     y0 += lineH;
 
     measurementstr = "UVB (280-320nm): ";
     myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
     y0 += lineH;
-    //measurementstr = "     " + UVB + " uW/cm^2";
-    myOLED.text(x0, y0, spacerstr, 1); // Draw the text - color of white
+    measurementstr = "     " + filler(UVB.length()) + " uW/cm^2";
+    myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
     y0 += lineH;
     
     measurementstr = "UVC (200-280nm): ";
     myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
     y0 += lineH;
-    measurementstr = "     " + UVC + " uW/cm^2";
-    myOLED.text(x0, y0, spacerstr, 1); // Draw the text - color of white
+    measurementstr = "     " + filler(UVC.length()) + " uW/cm^2";
+    myOLED.text(x0, y0, measurementstr, 1); // Draw the text - color of white
 
     // There's nothing on the screen yet - Now send the graphics to the device
     myOLED.display();
     //delay(1000);//testing only
-
 
 
     //now the actual measurments
