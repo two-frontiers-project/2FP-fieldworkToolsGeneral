@@ -38,6 +38,7 @@ We welcome your input, tips, and suggestions, by pull requests or via email to "
 
 ## Field sensors and digital communications
 
+- [UV spectral detector](./UV/) Arduino-based UV spectral meter
 - [Meshtastic](https://meshtastic.org/) Long distance LoRa mesh networking for field team GPS tracking and text communication as well as datalogging
 - IO Rodeo Arduino-based [pH meters](https://iorodeo.com/products/phfeatherwing) and [potentiostats](https://iorodeo.com/products/rodeostat-feather-wing)
 
